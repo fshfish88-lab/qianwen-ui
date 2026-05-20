@@ -5,6 +5,12 @@ const manualTime = document.querySelector("#manualTime");
 const qwenTime = document.querySelector("#qwenTime");
 const autoSelect = document.querySelector("#autoSelect");
 const startGenerate = document.querySelector("#startGenerate");
+const qwenIconButton = document.querySelector("#qwenIconButton");
+const heroGenerate = document.querySelector("#heroGenerate");
+const submitBrief = document.querySelector("#submitBrief");
+const sendCopyMessage = document.querySelector("#sendCopyMessage");
+const previewSignup = document.querySelector("#previewSignup");
+const deployPreview = document.querySelector("#deployPreview");
 const copyLink = document.querySelector("#copyLink");
 const linkOutput = document.querySelector("#linkOutput");
 const copyOfficialLink = document.querySelector("#copyOfficialLink");
@@ -31,6 +37,85 @@ const outputStepLabels = {
   发布二维码: "发布入口",
   资料解析: "资料解析"
 };
+
+function getToastStack() {
+  let stack = document.querySelector(".toast-stack");
+  if (!stack) {
+    stack = document.createElement("div");
+    stack.className = "toast-stack";
+    stack.setAttribute("aria-live", "polite");
+    document.body.appendChild(stack);
+  }
+  return stack;
+}
+
+function showToast(title, detail = "") {
+  const stack = getToastStack();
+  const toast = document.createElement("div");
+  toast.className = "toast";
+  toast.innerHTML = `<strong>${title}</strong>${detail ? `<span>${detail}</span>` : ""}`;
+  stack.appendChild(toast);
+
+  window.setTimeout(() => {
+    toast.classList.add("is-leaving");
+    window.setTimeout(() => toast.remove(), 220);
+  }, 2600);
+}
+
+function setButtonBusy(button, loadingText, doneText, callback) {
+  if (!button) {
+    return;
+  }
+  const originalText = button.dataset.originalText || button.textContent;
+  button.dataset.originalText = originalText;
+  button.textContent = loadingText;
+  button.classList.add("is-loading");
+  button.setAttribute("aria-busy", "true");
+
+  window.setTimeout(() => {
+    button.textContent = doneText;
+    button.classList.remove("is-loading");
+    button.removeAttribute("aria-busy");
+    callback?.();
+    window.setTimeout(() => {
+      button.textContent = originalText;
+    }, 1800);
+  }, 720);
+}
+
+function scrollToSection(selector) {
+  const target = document.querySelector(selector);
+  target?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function copyText(text) {
+  if (!navigator.clipboard || !text) {
+    return;
+  }
+  navigator.clipboard.writeText(text).catch(() => {});
+}
+
+function emitQwenParticles(button) {
+  const layer = button?.querySelector(".qwen-particles");
+  if (!layer) {
+    return;
+  }
+
+  const colors = ["#ffffff", "#ff8a2a", "#8d82ff", "#7ee8ff"];
+  for (let index = 0; index < 22; index += 1) {
+    const particle = document.createElement("span");
+    const angle = (Math.PI * 2 * index) / 22 + Math.random() * 0.28;
+    const distance = 48 + Math.random() * 54;
+    const size = 4 + Math.random() * 7;
+    particle.className = "qwen-particle";
+    particle.style.setProperty("--dx", `${Math.cos(angle) * distance}px`);
+    particle.style.setProperty("--dy", `${Math.sin(angle) * distance}px`);
+    particle.style.setProperty("--size", `${size}px`);
+    particle.style.setProperty("--particle-color", colors[index % colors.length]);
+    layer.appendChild(particle);
+    window.setTimeout(() => particle.remove(), 860);
+  }
+}
 
 function loadScript(src) {
   return new Promise((resolve, reject) => {
@@ -90,6 +175,7 @@ async function setupMotion() {
   gsap.set(".reveal", { autoAlpha: 0, y: 42 });
   gsap.to(".hero-copy", { autoAlpha: 1, y: 0, duration: 0.9, ease: "power3.out" });
   gsap.to(".hero-console", { autoAlpha: 1, y: 0, rotateX: 0, duration: 1, delay: 0.18, ease: "power3.out" });
+  gsap.to(".qwen-icon-button", { y: -14, duration: 2.4, ease: "sine.inOut", repeat: -1, yoyo: true });
   gsap.to(".hero-orbit span", {
     yPercent: -18,
     rotate: 10,
@@ -114,38 +200,6 @@ async function setupMotion() {
         toggleActions: "play none none reverse"
       }
     });
-  });
-
-  gsap.to(".ai-console", {
-    y: -24,
-    scale: 1.025,
-    ease: "none",
-    scrollTrigger: {
-      trigger: ".motion-hero",
-      start: "top top",
-      end: "bottom top",
-      scrub: true
-    }
-  });
-
-  gsap.utils.toArray(".flow-grid article").forEach((card, index) => {
-    gsap.fromTo(
-      card,
-      { autoAlpha: 0, y: 70, scale: 0.94 },
-      {
-        autoAlpha: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.7,
-        delay: (index % 5) * 0.04,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: card,
-          start: "top 86%",
-          toggleActions: "play none none reverse"
-        }
-      }
-    );
   });
 }
 
@@ -189,6 +243,49 @@ capabilityCards.forEach((card) => {
   });
 });
 
+if (qwenIconButton) {
+  qwenIconButton.addEventListener("click", () => {
+    qwenIconButton.classList.remove("is-spinning");
+    void qwenIconButton.offsetWidth;
+    qwenIconButton.classList.add("is-spinning");
+    qwenIconButton.setAttribute("aria-pressed", "true");
+    emitQwenParticles(qwenIconButton);
+    showToast("千问图标正在启动", "三叶片正在旋转，创意粒子已释放。");
+    window.setTimeout(() => {
+      qwenIconButton.classList.remove("is-spinning");
+      qwenIconButton.setAttribute("aria-pressed", "false");
+    }, 920);
+  });
+}
+
+document.querySelectorAll(".header-action, .primary-button, .hero-command button, .preview-hero button, .chat-input button").forEach((button) => {
+  button.addEventListener("click", () => {
+    button.classList.add("button-pressed");
+    window.setTimeout(() => button.classList.remove("button-pressed"), 180);
+  });
+});
+
+if (heroGenerate) {
+  heroGenerate.addEventListener("click", () => {
+    setButtonBusy(heroGenerate, "生成中", "已生成", () => {
+      showToast("宣传套件已生成", "千问已完成需求理解、能力调度和发布入口预览。");
+      scrollToSection("#workflow");
+    });
+  });
+}
+
+if (submitBrief) {
+  submitBrief.addEventListener("click", () => {
+    setButtonBusy(submitBrief, "理解中", "已提交", () => {
+      if (scenarioNext) {
+        scenarioNext.textContent = "千问已提取受众、目标、交付物和风格方向";
+      }
+      showToast("创作需求已提交", "下一步可以查看千问如何拆解任务。");
+      scrollToSection("#understand");
+    });
+  });
+}
+
 if (autoSelect) {
   autoSelect.addEventListener("click", () => {
     capabilityCards.forEach((card) => {
@@ -200,6 +297,7 @@ if (autoSelect) {
       }
     });
     refreshOutputs();
+    showToast("已智能推荐工作流", "文案、视觉、网页和发布入口已自动开启。");
   });
 }
 
@@ -210,7 +308,28 @@ if (startGenerate) {
     window.setTimeout(() => {
       startGenerate.textContent = "传播包已生成";
       startGenerate.removeAttribute("aria-busy");
+      showToast("传播包生成完成", "文案、海报、网页和视频脚本已进入整合预览。");
+      scrollToSection("#integrate");
     }, 900);
+  });
+}
+
+if (sendCopyMessage) {
+  sendCopyMessage.addEventListener("click", () => {
+    const panel = sendCopyMessage.closest(".chat-panel");
+    const input = sendCopyMessage.closest(".chat-input");
+    if (!panel || !input) {
+      return;
+    }
+    const userMessage = document.createElement("div");
+    userMessage.className = "message user";
+    userMessage.textContent = "请再给我一个更有行动感的版本。";
+    const aiMessage = document.createElement("div");
+    aiMessage.className = "message ai";
+    aiMessage.textContent = "已补充更强 CTA：现在加入，把你的第一个 AI 作品做出来。";
+    panel.insertBefore(userMessage, input);
+    panel.insertBefore(aiMessage, input);
+    showToast("文案对话已更新", "新的行动号召已经加入聊天记录。");
   });
 }
 
@@ -218,6 +337,8 @@ if (copyLink && linkOutput) {
   copyLink.addEventListener("click", () => {
     linkOutput.classList.add("visible");
     copyLink.textContent = "体验链接已复制";
+    copyText(linkOutput.textContent.trim());
+    showToast("体验链接已复制", "可以粘贴到社群、推文或海报二维码里。");
   });
 }
 
@@ -225,6 +346,24 @@ if (copyOfficialLink && officialLinkOutput) {
   copyOfficialLink.addEventListener("click", () => {
     officialLinkOutput.classList.add("visible");
     copyOfficialLink.textContent = "官网链接已复制";
+    copyText(officialLinkOutput.textContent.trim());
+    showToast("千问官网链接已复制", "链接已经准备好分享。");
+  });
+}
+
+if (previewSignup) {
+  previewSignup.addEventListener("click", () => {
+    showToast("报名入口已打开", "正在跳转到最终加入页面。");
+    scrollToSection("#join");
+  });
+}
+
+if (deployPreview) {
+  deployPreview.addEventListener("click", () => {
+    setButtonBusy(deployPreview, "部署中", "预览已部署", () => {
+      showToast("本地预览已部署", "报名网页已接入发布分享页面。");
+      scrollToSection("#publish");
+    });
   });
 }
 

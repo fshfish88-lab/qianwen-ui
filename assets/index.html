@@ -27,6 +27,17 @@
       <section class="hero-section motion-hero" aria-labelledby="heroTitle">
         <div class="ambient ambient-a"></div>
         <div class="ambient ambient-b"></div>
+        <button class="qwen-icon-button reveal" id="qwenIconButton" type="button" aria-label="启动千问图标动效" aria-pressed="false">
+          <span class="qwen-app-icon" aria-hidden="true">
+            <span class="qwen-blades">
+              <i class="qwen-blade blade-a"></i>
+              <i class="qwen-blade blade-b"></i>
+              <i class="qwen-blade blade-c"></i>
+            </span>
+            <span class="qwen-particles" aria-hidden="true"></span>
+          </span>
+          <span class="qwen-icon-label">千问</span>
+        </button>
         <div class="hero-copy reveal">
           <p class="eyebrow">Qwen Campus OS</p>
           <h1 id="heroTitle">一问启动，<br />万象成事</h1>
@@ -51,7 +62,7 @@
           <div class="hero-command">
             <b>Q</b>
             <p>帮我做一个面向大一新生的 AI 创作社团招新宣传方案。</p>
-            <button type="button">生成</button>
+            <button type="button" id="heroGenerate">生成</button>
           </div>
           <div class="hero-bento">
             <article class="soft-card orange-card">
@@ -110,7 +121,7 @@
             <textarea id="creativePrompt">帮我做一个面向大一新生的 AI 创作社团招新宣传方案。</textarea>
             <div class="textarea-meta">
               <span>29 / 500</span>
-              <button class="primary-button small" type="button">提交理解</button>
+              <button class="primary-button small" type="button" id="submitBrief">提交理解</button>
             </div>
           </article>
           <article class="analysis-card">
@@ -337,7 +348,7 @@
             <div class="message ai">我已理解你的需求，正在为 AI 创作社生成传播文案。</div>
             <div class="message user">希望更有科技感和吸引力。</div>
             <div class="message ai">已生成标题、推文开头、招新口号和活动介绍，可继续细化语气。</div>
-            <div class="chat-input">继续告诉我你的想法 <button type="button">发送</button></div>
+            <div class="chat-input">继续告诉我你的想法 <button type="button" id="sendCopyMessage">发送</button></div>
           </div>
           <div class="copy-options">
             <article><span>主标题</span><strong>创造无限可能，AI 从这里开始</strong><button class="apply-copy" type="button">应用</button></article>
@@ -394,7 +405,7 @@
             <div class="preview-hero">
               <strong id="previewTitle">创造无限可能，AI 从这里开始</strong>
               <p id="previewCopy">加入 AI 创作社，用千问把想法变成作品。</p>
-              <button type="button">立即报名</button>
+              <button type="button" id="previewSignup">立即报名</button>
             </div>
             <div class="preview-stats" id="previewStats"><span>120+ 成员</span><span>30+ 项目</span><span>10+ 活动</span></div>
           </article>
@@ -403,7 +414,7 @@
             <span class="done">生成页面结构</span>
             <span class="done">编写样式</span>
             <span class="running">绑定报名二维码</span>
-            <button class="primary-button small" type="button">一键部署预览</button>
+            <button class="primary-button small" type="button" id="deployPreview">一键部署预览</button>
           </aside>
         </div>
       </section>
