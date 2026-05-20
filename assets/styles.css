@@ -171,6 +171,15 @@ a {
 .hero-command button,
 .preview-hero button,
 .chat-input button {
+  position: relative;
+  overflow: hidden;
+}
+
+.header-action,
+.primary-button,
+.hero-command button,
+.preview-hero button,
+.chat-input button {
   color: #fff;
   background: linear-gradient(135deg, var(--orange), #ff8a2a);
   box-shadow: 0 14px 34px rgba(255, 106, 0, 0.26);
@@ -200,6 +209,30 @@ a {
 .chat-input button.is-loading {
   pointer-events: none;
   background: linear-gradient(135deg, #e95f00, #ff9a43);
+}
+
+.primary-button::after,
+.header-action::after,
+.hero-command button::after {
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 76%;
+  height: 100%;
+  content: "";
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.58), transparent);
+  transform: skewX(-22deg);
+  animation: button-shine 3.4s ease-in-out infinite;
+}
+
+@keyframes button-shine {
+  0% {
+    left: -120%;
+  }
+  42%,
+  100% {
+    left: 145%;
+  }
 }
 
 .primary-button.small,
@@ -357,6 +390,31 @@ main {
   animation: hero-flow-streaks 8.5s linear infinite;
 }
 
+.hero-section.is-launching::before {
+  opacity: 1;
+  filter: blur(20px) saturate(1.4);
+  animation-duration: 4.8s;
+}
+
+.hero-section.is-launching .hero-console {
+  box-shadow: 0 54px 150px rgba(97, 85, 245, 0.26), 0 28px 80px rgba(255, 106, 0, 0.22);
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(16, 19, 26, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 19, 26, 0.045) 1px, transparent 1px),
+    radial-gradient(circle at 50% 46%, rgba(255, 255, 255, 0.42), transparent 44%);
+  background-size: 48px 48px, 48px 48px, 100% 100%;
+  mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.72) 54%, transparent 86%);
+  opacity: 0.68;
+  animation: hero-grid-drift 10s linear infinite;
+}
+
 .ambient {
   position: absolute;
   pointer-events: none;
@@ -417,6 +475,15 @@ main {
 @keyframes ambient-drift-b {
   to {
     transform: translate3d(-58px, 48px, 0) scale(1.14);
+  }
+}
+
+@keyframes hero-grid-drift {
+  0% {
+    background-position: 0 0, 0 0, center;
+  }
+  100% {
+    background-position: 48px 48px, 48px 48px, center;
   }
 }
 
@@ -589,6 +656,36 @@ h1 {
   font-weight: 950;
 }
 
+.hero-title {
+  width: min(1160px, 92vw);
+}
+
+.hero-title-line {
+  display: block;
+  will-change: transform, opacity, filter;
+}
+
+.gradient-text {
+  color: transparent;
+  background: linear-gradient(90deg, #10131a 0%, #ff6a00 32%, #6155f5 62%, #10131a 100%);
+  background-size: 320% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: text-shine 4.4s ease-in-out infinite;
+}
+
+@keyframes text-shine {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 h2 {
   margin-bottom: 14px;
   font-size: clamp(42px, 5vw, 72px);
@@ -694,6 +791,7 @@ h3 {
   padding: 14px;
   box-shadow: var(--hard-shadow);
   transform-origin: center;
+  transform-style: preserve-3d;
 }
 
 .window-bar {
@@ -871,6 +969,47 @@ h3 {
   font-size: 12px;
   font-style: normal;
   font-weight: 950;
+  animation: step-active 4s ease-in-out infinite;
+}
+
+.mini-flow i:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.mini-flow i:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.mini-flow i:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+.mini-flow i:nth-child(4) {
+  animation-delay: 1.2s;
+}
+
+.mini-flow i:nth-child(5) {
+  animation-delay: 1.6s;
+}
+
+@keyframes step-active {
+  0%,
+  70%,
+  100% {
+    color: var(--purple);
+    background: rgba(255, 255, 255, 0.78);
+    box-shadow: none;
+    opacity: 0.58;
+    transform: scale(0.96);
+  }
+  15%,
+  35% {
+    color: #fff;
+    background: linear-gradient(135deg, var(--orange), var(--purple));
+    box-shadow: 0 12px 28px rgba(97, 85, 245, 0.24);
+    opacity: 1;
+    transform: scale(1.06);
+  }
 }
 
 .code-card {

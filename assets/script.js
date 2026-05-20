@@ -173,8 +173,33 @@ async function setupMotion() {
   gsap.registerPlugin(ScrollTrigger);
 
   gsap.set(".reveal", { autoAlpha: 0, y: 42 });
-  gsap.to(".hero-copy", { autoAlpha: 1, y: 0, duration: 0.9, ease: "power3.out" });
-  gsap.to(".hero-console", { autoAlpha: 1, y: 0, rotateX: 0, duration: 1, delay: 0.18, ease: "power3.out" });
+  gsap.set(".hero-kicker, .hero-title-line, .hero-subtitle, .hero-actions, .capability-strip", { autoAlpha: 0 });
+  gsap.set(".hero-title .line-1", { y: 46, filter: "blur(8px)" });
+  gsap.set(".hero-title .line-2", { y: 24, scale: 0.88, filter: "blur(10px)" });
+  gsap.set(".hero-subtitle, .hero-actions, .capability-strip", { y: 24 });
+  gsap.set(".hero-console", { y: 52, scale: 0.94, rotateX: 8, filter: "blur(10px)" });
+
+  const heroIntro = gsap.timeline({ defaults: { ease: "power3.out" } });
+  heroIntro
+    .to(".hero-copy", { autoAlpha: 1, y: 0, duration: 0.01 }, 0)
+    .to(".hero-kicker", { autoAlpha: 1, y: 0, duration: 0.45 }, 0)
+    .to(".hero-title .line-1", { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.8 }, 0.2)
+    .to(".hero-title .line-2", { autoAlpha: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.9, ease: "back.out(1.16)" }, 0.5)
+    .to(".hero-subtitle", { autoAlpha: 1, y: 0, duration: 0.8 }, 0.8)
+    .to(".hero-actions", { autoAlpha: 1, y: 0, duration: 0.72 }, 1.1)
+    .to(".capability-strip", { autoAlpha: 1, y: 0, duration: 0.72 }, 1.22)
+    .to(".hero-console", { autoAlpha: 1, y: 0, scale: 1, rotateX: 0, filter: "blur(0px)", duration: 1, ease: "back.out(1.12)" }, 1.3);
+
+  gsap.to(".hero-console", {
+    y: -14,
+    rotateX: 2,
+    rotateY: -3,
+    duration: 5,
+    ease: "sine.inOut",
+    repeat: -1,
+    yoyo: true,
+    delay: 2.4
+  });
   gsap.to(".qwen-icon-button", { y: -14, duration: 2.4, ease: "sine.inOut", repeat: -1, yoyo: true });
   gsap.to(".hero-orbit span", {
     yPercent: -18,
@@ -267,6 +292,9 @@ document.querySelectorAll(".header-action, .primary-button, .hero-command button
 
 if (heroGenerate) {
   heroGenerate.addEventListener("click", () => {
+    const heroSection = document.querySelector(".hero-section");
+    heroSection?.classList.add("is-launching");
+    window.setTimeout(() => heroSection?.classList.remove("is-launching"), 1400);
     setButtonBusy(heroGenerate, "生成中", "已生成", () => {
       showToast("宣传套件已生成", "千问已完成需求理解、能力调度和发布入口预览。");
       scrollToSection("#workflow");
