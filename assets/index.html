@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Qwen Campus OS | 千问校园共创工作台</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Qwen Campus OS 首页">
+        <img src="./aliyun-qwen-logo.png" alt="阿里云千问" />
+        <span>Campus OS</span>
+      </a>
+      <nav class="nav-links" aria-label="页面导航">
+        <a href="#input">输入理解</a>
+        <a href="#workflow">工作流</a>
+        <a href="#copy">内容生成</a>
+        <a href="#integrate">成果整合</a>
+        <a href="#publish">发布分享</a>
+        <a href="#join">加入我们</a>
+      </nav>
+      <a class="header-action" href="#join">体验千问</a>
+    </header>
+
+    <main id="top">
+      <section class="hero-section motion-hero" aria-labelledby="heroTitle">
+        <div class="ambient ambient-a"></div>
+        <div class="ambient ambient-b"></div>
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Qwen Campus OS</p>
+          <h1 id="heroTitle">一问启动，<br />万象成事</h1>
+          <p class="hero-lede">让校园创意从一句话，变成文案、视觉、网页、视频脚本和可分享链接。</p>
+          <div class="hero-actions">
+            <a class="primary-button" href="#input">启动千问工作流</a>
+            <a class="secondary-button" href="#understand">查看主流程</a>
+          </div>
+          <div class="capability-strip" aria-label="核心能力">
+            <span>语言生成</span>
+            <span>视觉生成</span>
+            <span>AI Coding</span>
+            <span>多模态理解</span>
+          </div>
+        </div>
+
+        <section class="hero-console reveal" aria-label="首页工作台演示">
+          <div class="window-bar">
+            <span></span><span></span><span></span>
+            <strong>社团招新宣传套件</strong>
+          </div>
+          <div class="hero-command">
+            <b>Q</b>
+            <p>帮我做一个面向大一新生的 AI 创作社团招新宣传方案。</p>
+            <button type="button">生成</button>
+          </div>
+          <div class="hero-bento">
+            <article class="soft-card orange-card">
+              <span>千问理解需求</span>
+              <strong>目标已识别</strong>
+              <p>大一新生、公众号传播、报名转化、科技感视觉。</p>
+            </article>
+            <article class="soft-card">
+              <span>能力调度</span>
+              <strong>5 个模块</strong>
+              <p>文案、海报、网页、视频脚本、发布二维码。</p>
+            </article>
+            <article class="workflow-card">
+              <span>工作流设计</span>
+              <strong>从一句需求<br />到完整发布</strong>
+              <div class="mini-flow" aria-label="工作流步骤">
+                <i>需求</i>
+                <i>文案</i>
+                <i>视觉</i>
+                <i>网页</i>
+                <i>发布</i>
+              </div>
+            </article>
+            <article class="model-card">
+              <span>多模型分工</span>
+              <div class="model-line">
+                <b>Qwen3.5-Omni</b>
+                <em>需求理解 / 文案</em>
+              </div>
+              <div class="model-line">
+                <b>Qwen-Image</b>
+                <em>海报 / 主视觉</em>
+              </div>
+              <div class="model-line">
+                <b>Qwen3-VL</b>
+                <em>图片识别 / 资料解析</em>
+              </div>
+              <div class="model-line">
+                <b>Wan2.7</b>
+                <em>视频脚本 / 分镜</em>
+              </div>
+            </article>
+          </div>
+        </section>
+      </section>
+
+      <section class="prototype-page input-page reveal" id="input" aria-labelledby="inputTitle">
+        <div class="page-title">
+          <p class="eyebrow">01 创意输入页</p>
+          <h2 id="inputTitle">告诉千问你的创意</h2>
+          <p>用户只需要说出一句真实需求，千问开始把想法变成任务。</p>
+        </div>
+        <div class="input-layout">
+          <article class="prompt-card">
+            <label for="creativePrompt">创作需求</label>
+            <textarea id="creativePrompt">帮我做一个面向大一新生的 AI 创作社团招新宣传方案。</textarea>
+            <div class="textarea-meta">
+              <span>29 / 500</span>
+              <button class="primary-button small" type="button">提交理解</button>
+            </div>
+          </article>
+          <article class="analysis-card">
+            <h3>校园场景轻量确认</h3>
+            <p class="section-note compact">先确认创作场景，千问会按不同校园任务匹配合适的生成策略。</p>
+            <div class="scenario-tags" aria-label="校园场景">
+              <button class="selected" type="button" data-next="千问提取受众、目标、交付物和风格方向">社团招新</button>
+              <button type="button" data-next="千问提取活动主题、时间、地点和传播节奏">校园活动</button>
+              <button type="button" data-next="千问提取课程亮点、作品结构和展示重点">课程展示</button>
+              <button type="button" data-next="千问提取项目卖点、路演内容和转化目标">创业项目</button>
+              <button type="button" data-next="千问提取公益议题、传播人群和行动号召">公益传播</button>
+              <button type="button" data-next="千问提取毕业记忆、人物故事和纪念物料">毕业季</button>
+            </div>
+            <div class="next-card">
+              <span>下一步</span>
+              <strong id="scenarioNext">千问提取受众、目标、交付物和风格方向</strong>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="prototype-page understand-page reveal" id="understand" aria-labelledby="understandTitle">
+        <div class="page-title">
+          <p class="eyebrow">02 千问理解需求页</p>
+          <h2 id="understandTitle">千问先把需求拆清楚</h2>
+          <p>在生成前确认任务边界，让后续文案、视觉、网页和视频都围绕同一个目标。</p>
+        </div>
+        <div class="understand-layout">
+          <article class="intent-card">
+            <span>原始输入</span>
+            <strong>AI 创作社团招新宣传方案</strong>
+            <p>目标不是单张海报，而是一套能报名、能传播、能复用的校园宣传作品。</p>
+          </article>
+          <article class="analysis-card">
+            <h3>千问结构化理解</h3>
+            <div class="brief-grid">
+              <span>目标受众<b>大一新生、AI 兴趣同学</b></span>
+              <span>传播目的<b>吸引报名并扩散社群</b></span>
+              <span>内容口径<b>年轻、有科技感、真实校园</b></span>
+              <span>交付物清单<b>推文、海报、网页、视频脚本、二维码</b></span>
+            </div>
+          </article>
+          <article class="question-card">
+            <h3>智能追问</h3>
+            <div class="question-row"><b>招新时间</b><span>9 月开学季</span><button class="edit-question" type="button" data-alt="9 月社团纳新周">修改</button></div>
+            <div class="question-row"><b>报名方式</b><span>二维码表单 + 社群链接</span><button class="edit-question" type="button" data-alt="报名页 + 班级群转发">修改</button></div>
+            <div class="question-row"><b>主视觉方向</b><span>橙紫科技感 + 校园真实场景</span><button class="edit-question" type="button" data-alt="橙紫科技感 + 社团作品墙">修改</button></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="prototype-page workflow-page reveal" id="workflow" aria-labelledby="workflowTitle">
+        <div class="page-title">
+          <p class="eyebrow">03 AI 工作流编排页</p>
+          <h2 id="workflowTitle">不是聊天窗口，<br />是校园创意操作系统。</h2>
+          <p>用户说出需求后，千问把任务拆解成可执行工作流，并同步生成内容、视觉、网页与发布物料。</p>
+        </div>
+        <div class="workflow-workbench">
+          <aside class="workflow-sidebar" aria-label="任务步骤">
+            <div class="profile-chip">
+              <span>学生创作者</span>
+              <strong>AI 创作社招新</strong>
+            </div>
+            <ol class="step-list">
+              <li class="done">输入需求</li>
+              <li class="done">理解 brief</li>
+              <li class="current">能力调度</li>
+              <li>内容生成</li>
+              <li>成果整合</li>
+              <li>分享发布</li>
+            </ol>
+          </aside>
+
+          <section class="orchestration-panel" aria-label="能力调度面板">
+            <div class="panel-header">
+              <div>
+                <span class="panel-kicker">Workflow Builder</span>
+                <h3>千问正在为你组装创意工作流</h3>
+              </div>
+              <button class="small-button" type="button" id="autoSelect">智能推荐</button>
+            </div>
+
+            <div class="capability-grid">
+              <button class="capability-card" type="button" data-output="推文文案">
+                <span>语言生成</span>
+                <strong>推文 / 策划 / 讲稿</strong>
+                <em>可选</em>
+              </button>
+              <button class="capability-card" type="button" data-output="主视觉海报">
+                <span>视觉生成</span>
+                <strong>海报 / 封面 / 主视觉</strong>
+                <em>可选</em>
+              </button>
+              <button class="capability-card" type="button" data-output="报名网页">
+                <span>代码生成</span>
+                <strong>官网 / 报名页 / 展示页</strong>
+                <em>可选</em>
+              </button>
+              <button class="capability-card" type="button" data-output="口播脚本">
+                <span>语音视频</span>
+                <strong>脚本 / 旁白 / 分镜</strong>
+                <em>可选</em>
+              </button>
+              <button class="capability-card enabled" type="button" data-output="发布二维码">
+                <span>工作流整合</span>
+                <strong>链接 / 二维码 / 复用模板</strong>
+                <em>已开启</em>
+              </button>
+              <button class="capability-card" type="button" data-output="资料解析">
+                <span>多模态理解</span>
+                <strong>图片 / Logo / 活动资料</strong>
+                <em>可选</em>
+              </button>
+            </div>
+            <div class="workflow-preview" aria-label="当前工作流预览">
+              <span>当前工作流</span>
+              <div id="workflowPreview">
+                <i>需求理解</i>
+                <i>发布二维码</i>
+              </div>
+            </div>
+          </section>
+
+          <aside class="preview-panel" aria-label="预计生成成果">
+            <div class="result-card">
+              <span>预计生成</span>
+              <strong id="resultCount">1 个成果</strong>
+              <ul id="resultList">
+                <li>发布二维码</li>
+              </ul>
+            </div>
+            <div class="time-card">
+              <div>
+                <span>手动完成</span>
+                <strong id="manualTime">1 小时</strong>
+              </div>
+              <div>
+                <span>千问协同</span>
+                <strong id="qwenTime">1 分钟</strong>
+              </div>
+            </div>
+            <button class="primary-button wide" type="button" id="startGenerate">启动生成</button>
+          </aside>
+        </div>
+      </section>
+
+      <section class="prototype-page model-page reveal" id="models" aria-labelledby="modelsTitle">
+        <div class="page-title">
+          <p class="eyebrow">04 多模型能力调度页</p>
+          <h2 id="modelsTitle">一个任务，<br />由多个模型分工完成</h2>
+          <p>千问像调度中心，把语言、视觉、代码、视频与多模态理解能力编排成完整链路。</p>
+        </div>
+        <div class="model-layout">
+          <article class="model-spotlight">
+            <span>调度中心</span>
+            <strong>Qwen Campus OS</strong>
+            <p>统一理解 brief，分配模型能力，最后把各类成果重新整合成一个可发布项目。</p>
+          </article>
+          <div class="model-grid">
+            <article class="model-flip-card" tabindex="0">
+              <div class="model-face model-front">
+                <span>文本 / 对话</span>
+                <strong>Qwen3.5-Omni</strong>
+                <p>负责需求理解、推文文案、招新口号和答辩表达。</p>
+              </div>
+              <div class="model-face model-back">
+                <span>具体功能</span>
+                <strong>输入 brief，输出传播文案</strong>
+                <p><b>输入 </b>校园 brief、目标受众、传播语气</p>
+                <p><b>输出 </b>推文标题、招新口号、活动介绍</p>
+              </div>
+            </article>
+            <article class="model-flip-card" tabindex="0">
+              <div class="model-face model-front">
+                <span>图片生成</span>
+                <strong>Qwen-Image</strong>
+                <p>负责海报、封面、主视觉和社群传播图。</p>
+              </div>
+              <div class="model-face model-back">
+                <span>具体功能</span>
+                <strong>生成统一视觉物料</strong>
+                <p><b>输入 </b>文案关键词、视觉约束、品牌色</p>
+                <p><b>输出 </b>海报、封面、主视觉和社群图</p>
+              </div>
+            </article>
+            <article class="model-flip-card" tabindex="0">
+              <div class="model-face model-front">
+                <span>视觉理解</span>
+                <strong>Qwen3-VL</strong>
+                <p>识别 Logo、校园素材和已有活动资料，保证内容不跑偏。</p>
+              </div>
+              <div class="model-face model-back">
+                <span>具体功能</span>
+                <strong>解析素材，校正方向</strong>
+                <p><b>输入 </b>Logo、活动照片、已有宣传资料</p>
+                <p><b>输出 </b>素材识别、风格判断和内容校正</p>
+              </div>
+            </article>
+            <article class="model-flip-card" tabindex="0">
+              <div class="model-face model-front">
+                <span>视频创意</span>
+                <strong>Wan2.7</strong>
+                <p>生成 60 秒招新短视频脚本、镜头节奏和旁白结构。</p>
+              </div>
+              <div class="model-face model-back">
+                <span>具体功能</span>
+                <strong>生成短视频分镜</strong>
+                <p><b>输入 </b>活动文案、视觉方向、镜头节奏</p>
+                <p><b>输出 </b>60 秒短视频脚本、分镜和旁白</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="prototype-page copy-page reveal" id="copy" aria-labelledby="copyTitle">
+        <div class="page-title align-left">
+          <p class="eyebrow">05 文案生成页</p>
+          <h2 id="copyTitle">生成能直接使用的招新文案</h2>
+          <p>从一句需求，到标题、推文、口号和活动介绍，结果直接进入后续视觉与网页生成。</p>
+        </div>
+        <div class="copy-layout">
+          <div class="chat-panel">
+            <div class="message ai">我已理解你的需求，正在为 AI 创作社生成传播文案。</div>
+            <div class="message user">希望更有科技感和吸引力。</div>
+            <div class="message ai">已生成标题、推文开头、招新口号和活动介绍，可继续细化语气。</div>
+            <div class="chat-input">继续告诉我你的想法 <button type="button">发送</button></div>
+          </div>
+          <div class="copy-options">
+            <article><span>主标题</span><strong>创造无限可能，AI 从这里开始</strong><button class="apply-copy" type="button">应用</button></article>
+            <article><span>推文开头</span><strong>如果你想把脑洞变成作品，这个社团会给你第一套工具。</strong><button class="apply-copy" type="button">应用</button></article>
+            <article><span>招新口号</span><strong>加入 AI 创作社团，一起定义青春想象力</strong><button class="apply-copy" type="button">应用</button></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="prototype-page visual-page reveal" id="visual" aria-labelledby="visualTitle">
+        <div class="page-title align-left">
+          <p class="eyebrow">06 视觉生成页</p>
+          <h2 id="visualTitle">把文案生成海报、封面和主视觉</h2>
+          <p>视觉页不再只是风格板，而是展示可交付的真实传播物料。</p>
+        </div>
+        <div class="visual-layout visual-output-layout">
+          <aside class="style-board generation-brief">
+            <h3>生成提示词</h3>
+            <p>大学校园夜景、AI 创作社招新、橙紫科技光线、真实学生社团氛围、清晰报名 CTA。</p>
+            <h3>视觉约束</h3>
+            <div class="brief-tags"><i>阿里云橙</i><i>科技紫</i><i>年轻但不幼稚</i></div>
+            <h3>输出规格</h3>
+            <div class="output-specs">
+              <span>公众号封面 900×383</span>
+              <span>招新海报 1080×1440</span>
+              <span>社群横幅 1920×720</span>
+            </div>
+          </aside>
+          <div class="poster-gallery generated-gallery">
+            <article class="selected" tabindex="0"><span>主海报</span><strong>AI 创作<br />社团招新</strong></article>
+            <article tabindex="0"><span>公众号封面</span><strong>创造无限<br />可能</strong></article>
+            <article tabindex="0"><span>活动主视觉</span><strong>一问启动<br />万象成事</strong></article>
+            <article tabindex="0"><span>社群分享图</span><strong>从想法到<br />作品</strong></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="prototype-page ui-page reveal" id="ui" aria-labelledby="uiTitle">
+        <div class="page-title align-left">
+          <p class="eyebrow">07 网页 / 代码生成页</p>
+          <h2 id="uiTitle">AI Coding 生成报名网页</h2>
+          <p>把文案和视觉风格组装成可预览、可发布、可扫码报名的网页界面。</p>
+        </div>
+        <div class="builder-layout">
+          <aside class="builder-nav">
+            <b>页面结构</b>
+            <button class="active" type="button" data-title="创造无限可能，AI 从这里开始" data-copy="加入 AI 创作社，用千问把想法变成作品。" data-stats="120+ 成员|30+ 项目|10+ 活动">Hero 区域</button>
+            <button type="button" data-title="我们把 AI 变成校园创作工具" data-copy="从推文、海报到网页和视频脚本，每个成员都能把想法做成作品。" data-stats="6 个方向|每周共创|作品展示">社团介绍</button>
+            <button type="button" data-title="创意、技术、传播一起发生" data-copy="千问协同语言、视觉、代码与多模态能力，帮你补齐从想法到发布的每一步。" data-stats="多模型|自动编排|一键发布">核心亮点</button>
+            <button type="button" data-title="真实活动和作品持续更新" data-copy="社团将展示海报创作、网页搭建、短视频脚本和 AI 应用挑战赛成果。" data-stats="招新路演|工作坊|作品展">活动展示</button>
+            <button type="button" data-title="扫码加入 AI 创作社" data-copy="填写报名表，选择你想参与的创作方向，和同学一起做出第一件 AI 作品。" data-stats="二维码|报名表|社群链接">加入我们</button>
+          </aside>
+          <article class="website-preview">
+            <div class="preview-hero">
+              <strong id="previewTitle">创造无限可能，AI 从这里开始</strong>
+              <p id="previewCopy">加入 AI 创作社，用千问把想法变成作品。</p>
+              <button type="button">立即报名</button>
+            </div>
+            <div class="preview-stats" id="previewStats"><span>120+ 成员</span><span>30+ 项目</span><span>10+ 活动</span></div>
+          </article>
+          <aside class="coding-assist">
+            <b>AI Coding 助手</b>
+            <span class="done">生成页面结构</span>
+            <span class="done">编写样式</span>
+            <span class="running">绑定报名二维码</span>
+            <button class="primary-button small" type="button">一键部署预览</button>
+          </aside>
+        </div>
+      </section>
+
+      <section class="prototype-page video-page reveal" id="video" aria-labelledby="videoTitle">
+        <div class="page-title align-left">
+          <p class="eyebrow">08 视频脚本生成页</p>
+          <h2 id="videoTitle">生成 60 秒宣传视频分镜</h2>
+          <p>把同一套文案和视觉方向转成短视频脚本，保证传播口径统一。</p>
+        </div>
+        <div class="storyboard">
+          <div class="story-row header"><span>场景</span><span>画面描述</span><span>旁白文案</span><span>时长</span></div>
+          <div class="story-row"><span>01</span><b>校园全景切入</b><p>这里，是梦想开始的地方</p><em>6s</em></div>
+          <div class="story-row"><span>02</span><b>社团活动快剪</b><p>用创意点亮灵感</p><em>8s</em></div>
+          <div class="story-row"><span>03</span><b>AI 创作过程</b><p>让 AI 成为你的创作伙伴</p><em>10s</em></div>
+          <div class="story-row"><span>04</span><b>作品展示</b><p>从想法到作品，只差一次尝试</p><em>10s</em></div>
+          <div class="story-row"><span>05</span><b>成员发出邀请</b><p>现在，加入我们</p><em>8s</em></div>
+          <div class="story-row"><span>06</span><b>报名 CTA</b><p>一起定义青春想象力</p><em>8s</em></div>
+        </div>
+      </section>
+
+      <section class="prototype-page integrate-page reveal" id="integrate" aria-labelledby="integrateTitle">
+        <div class="page-title align-left">
+          <p class="eyebrow">09 成果整合预览页</p>
+          <h2 id="integrateTitle">一套校园传播作品已经组装完成</h2>
+          <p>文案、海报、网页、视频脚本和二维码在这里汇总，用户能确认整套作品是否可发布。</p>
+        </div>
+        <div class="integrate-layout">
+          <article class="package-card main-package integration-item selected" tabindex="0" data-title="AI 创作社招新传播套件" data-desc="整合包包含文案、视觉、网页、视频脚本和发布入口，适合直接提交给团队检查。">
+            <span>整合包</span>
+            <strong>AI 创作社招新传播套件</strong>
+            <p>从一句话需求生成 5 类成果，统一风格、统一口径、统一发布入口。</p>
+          </article>
+          <article class="package-card integration-item" tabindex="0" data-title="3 套标题与推文" data-desc="预览主标题、推文开头和招新口号，确认是否符合社团语气。"><span>文案</span><strong>3 套标题与推文</strong><p>主标题、推文开头、招新口号。</p></article>
+          <article class="package-card integration-item" tabindex="0" data-title="4 张传播图" data-desc="预览主海报、公众号封面、活动主视觉和社群分享图。"><span>视觉</span><strong>4 张传播图</strong><p>海报、封面、主视觉、社群分享图。</p></article>
+          <article class="package-card integration-item" tabindex="0" data-title="报名页已生成" data-desc="检查 Hero、社团介绍、活动亮点和报名 CTA 是否完整。"><span>网页</span><strong>报名页已生成</strong><p>包含介绍、亮点、活动展示和报名 CTA。</p></article>
+          <article class="package-card integration-item" tabindex="0" data-title="60 秒分镜脚本" data-desc="查看 6 个镜头、旁白、节奏和结尾 CTA，方便后续拍摄。"><span>视频</span><strong>60 秒分镜脚本</strong><p>6 个镜头、旁白、节奏和结尾 CTA。</p></article>
+          <article class="package-card publish-strip">
+            <div>
+              <span>最终发布入口</span>
+              <strong>生成分享链接与报名二维码</strong>
+              <p>整合后的传播套件会统一输出一个公开链接，海报、网页和视频脚本都指向同一个报名入口。</p>
+            </div>
+            <div class="qr mini" aria-label="报名二维码预览"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="prototype-page publish-page reveal" id="publish" aria-labelledby="publishTitle">
+        <div class="page-title align-left">
+          <p class="eyebrow">10 成果整合与发布页</p>
+          <h2 id="publishTitle">发布成功，分享你的创意</h2>
+          <p>最后一步完成体验链接、二维码、渠道分发和基础数据预览。</p>
+        </div>
+        <div class="publish-layout final-publish-layout">
+          <article class="share-link">
+            <h3>公开链接</h3>
+            <p id="linkOutput">https://campus.aliyun.com/p/ai-creative-club</p>
+            <button class="primary-button small" type="button" id="copyLink">复制链接</button>
+            <div class="qr"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </article>
+          <article class="channel-card">
+            <h3>渠道分发</h3>
+            <span>小红书<button class="channel-toggle" type="button" aria-pressed="false">选择</button></span>
+            <span>微信朋友圈<button class="channel-toggle" type="button" aria-pressed="false">选择</button></span>
+            <span>校园社群<button class="channel-toggle" type="button" aria-pressed="false">选择</button></span>
+            <span>展会大屏<button class="channel-toggle" type="button" aria-pressed="false">选择</button></span>
+          </article>
+          <article class="data-card">
+            <h3>发布数据预览</h3>
+            <div class="metric-grid">
+              <span>访问量<b>1,286</b></span>
+              <span>报名人数<b>163</b></span>
+              <span>分享次数<b>214</b></span>
+            </div>
+            <div class="delivery-list">
+              <span>文案方案 3 版</span>
+              <span>视觉物料 4 张</span>
+              <span>报名网页 1 个</span>
+              <span>视频脚本 1 版</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="prototype-page join-page reveal" id="join" aria-labelledby="joinTitle">
+        <div class="page-title join-title">
+          <p class="eyebrow">Qwen Campus OS</p>
+          <h2 id="joinTitle">加入我们</h2>
+          <p>和千问一起，把校园里的每个想法变成可落地的 AI 应用。</p>
+          <div class="join-actions">
+            <a class="primary-button" href="https://qianwen.aliyun.com/" target="_blank" rel="noreferrer">访问千问官网</a>
+            <button class="secondary-button" type="button" id="copyOfficialLink">复制官网链接</button>
+          </div>
+          <p class="official-link" id="officialLinkOutput">https://qianwen.aliyun.com/</p>
+        </div>
+        <div class="join-window">
+          <div class="window-bar centered">
+            <span></span><span></span><span></span>
+            <strong>阿里云 × 千问大模型 Campus OS</strong>
+          </div>
+          <div class="join-grid">
+            <article class="why-card">
+              <h3>为什么加入？</h3>
+              <div class="reason-row">
+                <i>AI</i>
+                <div><b>用 AI 降低创作门槛</b><p>无需复杂技能，人人都能创作专业作品</p></div>
+              </div>
+              <div class="reason-row">
+                <i>问</i>
+                <div><b>从一句话生成完整方案</b><p>灵感即输入，方案即输出，高效又智能</p></div>
+              </div>
+              <div class="reason-row">
+                <i>链</i>
+                <div><b>让作品具备真实体验链接</b><p>一键发布与分享，让创意被真实体验</p></div>
+              </div>
+            </article>
+            <article class="audience-card">
+              <h3>适合谁？</h3>
+              <div class="audience-grid">
+                <span>设计同学</span>
+                <span>编程同学</span>
+                <span>策划同学</span>
+                <span>社团团队</span>
+                <span>AI 兴趣者</span>
+              </div>
+            </article>
+            <article class="try-card">
+              <h3>自主挑选模型</h3>
+              <div class="model-pick-list" aria-label="可选模型">
+                <span>Qwen3.5-Omni<b>文案</b></span>
+                <span>Qwen-Image<b>视觉</b></span>
+                <span>Qwen3-VL<b>识别</b></span>
+                <span>Wan2.7<b>视频</b></span>
+              </div>
+              <p>按任务选择模型，让每个校园创意都有合适的 AI 能力参与。</p>
+              <a class="primary-button small" href="#models">查看模型分工</a>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
